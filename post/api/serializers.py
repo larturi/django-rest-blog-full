@@ -1,7 +1,19 @@
 from rest_framework import serializers
 from post.models import Post
-from user.api.serializers import UserSerializer
-from category.api.serializers import CategorySerializer
+from user.models import User
+from category.models import Category
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', ]
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', ]
 
 
 class PostSerializer(serializers.ModelSerializer):

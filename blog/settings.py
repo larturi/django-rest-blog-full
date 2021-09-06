@@ -1,12 +1,20 @@
 
 
 import os
-from pathlib import Path
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -15,8 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-t*r1rpovcl0rdq*h&(y96o*g_tp5ne=%t6)r)&knp+-v)$%(^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 
@@ -75,11 +82,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'etqexnhsdfrjdw',
-        'NAME': 'd1a0indq70njc0',
-        'PASSWORD': 'c2d7ea1d8c73ab3fc1a0a77a5e2d32dd0a7cdc0aa71474f2939d2e29a89d6467',
-        'HOST': 'ec2-34-204-128-77.compute-1.amazonaws.com',
+        'ENGINE': env('DATABASE_ENGINE'),
+        'USER': env('DATABASE_USER'),
+        'NAME': env('DATABASE_NAME'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
     }
 }
 
