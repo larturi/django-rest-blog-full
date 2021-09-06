@@ -4,24 +4,10 @@ from user.models import User
 from category.models import Category
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', ]
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', ]
-
-
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    category = CategorySerializer()
-
     class Meta:
         model = Post
+        depth = 2
         fields = [
             'id',
             'title',
@@ -30,6 +16,6 @@ class PostSerializer(serializers.ModelSerializer):
             'miniature',
             'created_at',
             'published',
+            'category',
             'user',
-            'category'
         ]
