@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from user.models import User
 from user.api.serializers import (
     UserRegisterSerializer,
-    UserSrializer,
+    UserSerializer,
     UserUpdateSerializer
 )
 
@@ -25,7 +25,7 @@ class UserView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        serializer = UserSrializer(request.user)
+        serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
     def put(self, request):
