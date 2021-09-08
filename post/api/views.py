@@ -1,5 +1,4 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
 from post.api.serializers import PostSerializer
 from post.api.permissions import IsAdminOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
