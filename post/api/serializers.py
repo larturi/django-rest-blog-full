@@ -1,14 +1,22 @@
+from category.api.serializers import CategorySerializer
 from rest_framework import serializers
-from rest_framework.relations import PrimaryKeyRelatedField
 from post.models import Post
-from category.models import Category
 
 
 class PostSerializer(serializers.ModelSerializer):
-    category = PrimaryKeyRelatedField(queryset=Category.objects.all())
+
+    category_data = CategorySerializer(source="category", read_only=True)
 
     class Meta:
         model = Post
-        depth = 2
-        fields = ['title', 'content', 'slug', 'miniature',
-                  'created_at', 'published', 'user', 'category']
+        fields = [
+            'title',
+            'content',
+            'slug',
+            'miniature',
+            'created_at',
+            'published',
+            'user',
+            'category',
+            'category_data'
+        ]
